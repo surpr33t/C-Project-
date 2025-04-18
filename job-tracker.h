@@ -7,15 +7,15 @@
 // base class 
 class ApplicationEvent {
 protected:
-    std::string date_;    // Date of the event, e.g. "2025-04-18"
-    std::string notes_;   // free notes or comments 
+    std::string date_;    
+    std::string notes_;  
 
 public:
     ApplicationEvent(const std::string& date,
                      const std::string& notes);
     virtual ~ApplicationEvent();
 
-    // Returns the event type as a string (e.g., "Resume", "Interview", "Offer")
+    // Returns the event type as a string 
     virtual std::string getType()   const = 0;
 
     // Prints details of the event
@@ -32,36 +32,36 @@ public:
     ResumeSubmissionEvent(const std::string& date,
                           const std::string& notes);
 
-    std::string getType()   const override;  // returns "Resume"
-    void        printEvent() const override;
+    std::string getType()   const;  
+    void        printEvent() const;
 };
-// records an interview, with format (phone, video, onsite)
+// records an interview, with format 
 //______
 enum class InterviewFormat { PHONE, VIDEO, ONSITE };
 
 class InterviewEvent : public ApplicationEvent {
-    InterviewFormat format_;  // The mode of the interview
+    InterviewFormat format_;  
 public:
     InterviewEvent(const std::string& date,
                    const std::string& notes,
                    InterviewFormat format);
 
-    std::string getType()   const override;  // returns "Interview"
-    void        printEvent() const override;
+    std::string getType()   const;  
+    void        printEvent() const;
 
     InterviewFormat getFormat() const;
 };
 // records a job offer, including offered salary
 //_______
 class OfferEvent : public ApplicationEvent {
-    double salary_;  // Annual salary amount
+    double salary_;  
 public:
     OfferEvent(const std::string& date,
                const std::string& notes,
                double salary);
 
-    std::string getType()   const override;  // returns "Offer"
-    void        printEvent() const override;
+    std::string getType()   const;  
+    void        printEvent() const;
 
     double getSalary() const;
 };
@@ -71,9 +71,9 @@ public:
 //____
 class Company {
 private:
-    std::string name_;      // Company name
-    std::string location_;  // Headquarters or job location
-    std::string website_;   // Company URL
+    std::string name_;      
+    std::string location_;  
+    std::string website_;   
 
 public:
     Company(const std::string& name,
@@ -99,18 +99,18 @@ public:
 // ______
 class Application {
 private:
-    Company                        company_;       // Target company
-    std::string                    position_;      // Job title
-    std::string                    dateApplied_;   // Date of initial application
-    std::string                    status_;        // Current status (e.g., "Applied", "Interviewing")
-    std::vector<ApplicationEvent*> events_;        // History of events
+    Company                        company_;       
+    std::string                    position_;      
+    std::string                    dateApplied_;   
+    std::string                    status_;        
+    std::vector<ApplicationEvent*> events_;      
 
 public:
     Application(const Company&     company,
                 const std::string& position,
                 const std::string& dateApplied);
 
-    ~Application();  // Deletes owned events
+    ~Application();  
 
     //adds a new event (resume submission, interview, offer, etc.)
     void addEvent(ApplicationEvent* e);
