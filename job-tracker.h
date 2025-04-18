@@ -7,30 +7,30 @@
 // base class 
 class ApplicationEvent {
 protected:
-    std::string date_;    
-    std::string notes_;  
+    string date_;    
+    string notes_;  
 
 public:
-    ApplicationEvent(const std::string& date,
-                     const std::string& notes);
+    ApplicationEvent(const string& date,
+                     const string& notes);
     virtual ~ApplicationEvent();
 
     // Returns the event type as a string 
-    virtual std::string getType()   const = 0;
+    virtual string getType()   const = 0;
 
     // Prints details of the event
     virtual void        printEvent() const = 0;
 
     // Accessors for common data
-    std::string getDate()  const;
-    std::string getNotes() const;
+    string getDate()  const;
+    string getNotes() const;
 };
 //records when a resume was submitted to a company
 ____
 class ResumeSubmissionEvent : public ApplicationEvent {
 public:
-    ResumeSubmissionEvent(const std::string& date,
-                          const std::string& notes);
+    ResumeSubmissionEvent(const string& date,
+                          const string& notes);
 
     std::string getType()   const;  
     void        printEvent() const;
@@ -42,11 +42,11 @@ enum class InterviewFormat { PHONE, VIDEO, ONSITE };
 class InterviewEvent : public ApplicationEvent {
     InterviewFormat format_;  
 public:
-    InterviewEvent(const std::string& date,
-                   const std::string& notes,
+    InterviewEvent(const string& date,
+                   const string& notes,
                    InterviewFormat format);
 
-    std::string getType()   const;  
+    string getType()   const;  
     void        printEvent() const;
 
     InterviewFormat getFormat() const;
@@ -56,11 +56,11 @@ public:
 class OfferEvent : public ApplicationEvent {
     double salary_;  
 public:
-    OfferEvent(const std::string& date,
-               const std::string& notes,
+    OfferEvent(const string& date,
+               const string& notes,
                double salary);
 
-    std::string getType()   const;  
+    string getType()   const;  
     void        printEvent() const;
 
     double getSalary() const;
@@ -71,24 +71,24 @@ public:
 //____
 class Company {
 private:
-    std::string name_;      
-    std::string location_;  
-    std::string website_;   
+    string name_;      
+    string location_;  
+    string website_;   
 
 public:
-    Company(const std::string& name,
-            const std::string& location,
-            const std::string& website);
+    Company(const string& name,
+            const string& location,
+            const string& website);
 
     //retrieve or update company details
-    std::string getName()     const;
-    void        setName(const std::string&);
+    string getName()     const;
+    void        setName(const string&);
 
-    std::string getLocation() const;
-    void        setLocation(const std::string&);
+    string getLocation() const;
+    void        setLocation(const string&);
 
-    std::string getWebsite()  const;
-    void        setWebsite(const std::string&);
+    string getWebsite()  const;
+    void        setWebsite(const string&);
 
     //print company information
     void printInfo() const;
@@ -100,15 +100,15 @@ public:
 class Application {
 private:
     Company                        company_;       
-    std::string                    position_;      
-    std::string                    dateApplied_;   
-    std::string                    status_;        
-    std::vector<ApplicationEvent*> events_;      
+    string                    position_;      
+    string                    dateApplied_;   
+    string                    status_;        
+    vector<ApplicationEvent*> events_;      
 
 public:
     Application(const Company&     company,
-                const std::string& position,
-                const std::string& dateApplied);
+                const string& position,
+                const string& dateApplied);
 
     ~Application();  
 
@@ -116,18 +116,18 @@ public:
     void addEvent(ApplicationEvent* e);
 
     //updates the application status string
-    void updateStatus(const std::string& newStatus);
+    void updateStatus(const string& newStatus);
 
     //gets current status
-    std::string getStatus() const;
+    string getStatus() const;
 
     //prints a summary of the application and its events
     void printSummary() const;
 
     //access the main fields
     const Company&     getCompany()     const;
-    const std::string& getPosition()    const;
-    const std::string& getDateApplied() const;
+    const string& getPosition()    const;
+    const string& getDateApplied() const;
 };
 
 #endif // JOBTRACKER_H
